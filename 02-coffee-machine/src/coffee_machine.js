@@ -31,7 +31,7 @@ class CoffeeMachine {
 
     // private method
     _needsStick() {
-
+        return this.sweetness != 0
     }
 
     parseOrder() {

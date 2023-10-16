@@ -41,4 +41,18 @@ describe('CoffeeMachine', function () {
 			expect(coffeeMachine.sweetness).toBe(default_sweetness_level)
 		})
 	})
+
+	describe("method _needsStick should", () => {
+		test("return true when stick is needed", () => {
+			const sweetness_level = 2
+			coffeeMachine.setSweetness(sweetness_level)
+			expect(coffeeMachine._needsStick()).toBe(true)
+		})
+
+		test("return false when stick is not needed", () => {
+			const sweetness_level = 0
+			coffeeMachine.setSweetness(sweetness_level)
+			expect(coffeeMachine._needsStick()).toBe(false)
+		})
+	})
 });
