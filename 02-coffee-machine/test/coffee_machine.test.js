@@ -42,7 +42,7 @@ describe('CoffeeMachine', function () {
 		})
 	})
 
-	describe("method _needsStick should", () => {
+	describe("private method _needsStick should", () => {
 		test("return true when stick is needed", () => {
 			const sweetness_level = 2
 			coffeeMachine.setSweetness(sweetness_level)
@@ -53,6 +53,32 @@ describe('CoffeeMachine', function () {
 			const sweetness_level = 0
 			coffeeMachine.setSweetness(sweetness_level)
 			expect(coffeeMachine._needsStick()).toBe(false)
+		})
+	})
+
+	describe("method parseOrder should", () => {
+		test("correctly parse drink with no sweetness to drink maker command", () => {
+			const sweetness = 0
+			coffeeMachine.setSweetness(sweetness)
+			const drink = "coffee"
+			coffeeMachine.setDrink(drink)
+			const command = coffeeMachine.parseOrder()
+			expect(command).toBe("C::")
+		})
+
+		test("correctly parse drink with sweetness to drink maker command", () => {
+			const sweetness = 2
+			coffeeMachine.setSweetness(sweetness)
+			const drink = "coffee"
+			coffeeMachine.setDrink(drink)
+			const command = coffeeMachine.parseOrder()
+			expect(command).toBe("C:2:0")
+		})
+
+		test("throw error when order is invalid", () => {
+			const invalid_drink = "orchata"
+			coffeeMachine.setDrink(invalid_drink)
+			expect(() => coffeeMachine.parseOrder()).toThrow()
 		})
 	})
 });

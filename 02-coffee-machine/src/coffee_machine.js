@@ -35,7 +35,26 @@ class CoffeeMachine {
     }
 
     parseOrder() {
-        return "C:2:0"
+        let command = ""
+
+        const drinks = {
+            "coffee": "C",
+            "tea": "T",
+            "chocolate": "H"
+        }
+
+        const selectedDrink = drinks[this.drink]
+        if (!selectedDrink) throw "No drink selected yet, order invalid"
+
+        command = command + selectedDrink
+
+        if (this.sweetness != 0) {
+            command = command + ":" + this.sweetness + ":0"
+        } else {
+            command = command + "::"
+        }
+
+        return command
     }
 
     sendOrder() {
